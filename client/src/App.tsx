@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Person } from "./types";
 import "./App.css";
+import "@mantine/core/styles.css";
+
+import { Button, MantineProvider } from "@mantine/core";
 
 const AVATAR_1 =
   "https://res.cloudinary.com/dqse2txyi/image/upload/v1666049372/axum_server/img_avatar_lf92vl.png";
@@ -18,20 +21,22 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
-      {people.map((person, index) => (
-        <div key={index} className="card">
-          <img src={index % 2 == 0 ? AVATAR_1 : AVATAR_2} alt="Avatar" />
-          <div className="container">
-            <h4>
-              <b>{person.name}</b>
-            </h4>
-            <p>Age: {person.age}</p>
-            <p>Favourite Food: {person.favourite_food ?? "Unknown"}</p>
+    <MantineProvider>
+      <div className="app">
+        {people.map((person, index) => (
+          <div key={index} className="card">
+            <img src={index % 2 == 0 ? AVATAR_1 : AVATAR_2} alt="Avatar" />
+            <div className="container">
+              <h4>
+                <b>{person.name}</b>
+              </h4>
+              <Button>Age: {person.age}</Button>
+              <p>Favourite Food: {person.favourite_food ?? "Unknown"}</p>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    </MantineProvider>
   );
 }
 
